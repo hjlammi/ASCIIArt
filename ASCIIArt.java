@@ -16,13 +16,20 @@ public class ASCIIArt {
         // Kutsutaan metodia, joka tulostaa tervehdyksen.
         tulostaTervehdys();
 
+        char[][] merkit;
+
         if (args.length > 0) {
             String tiedostonNimi = args[0];
-            char[][] merkit = luoTaulukko(tiedostonNimi);
+            merkit = luoTaulukko(tiedostonNimi);
             if (args.length != 1 || merkit == null) {
                 System.out.println("Invalid command-line argument!");
             } else {
                 tulostaKomennot();
+                // Luetaan käyttäjältä komento.
+                String komento = In.readString();
+                if (komento.equals("printa")) {
+                    tulosta(merkit);
+                }
             }
         } else {
             System.out.println("Invalid command-line argument!");
@@ -66,6 +73,28 @@ public class ASCIIArt {
 
     public static void tulostaHeipat() {
         System.out.println("Bye, see you soon.");
+    }
+
+    // Metodi tulostaa parametrina saamansa kaksiulotteisen taulukon.
+    public static void tulosta(char[][] merkit){
+
+        // Tulostetaan vain jos taulukolle on varattu muistia.
+        if (merkit != null) {
+            // Suoritetaan ulommaista silmukkaa niin kauan kuin saadaan kaikki rivit tulostettua.
+            for (int i = 0; i < merkit.length; i++){
+                // Suoritetaan sisimmäistä silmukkaa niin kauan kuin saadaan sarakkeiden sisällöt
+                // tulostettua eli niin kauan kuin sarakkeen arvo on pienempi kuin rivin pituus.
+                for (int j = 0; j < merkit[i].length; j++){
+                    System.out.print(merkit[i][j]);
+                }
+                // Sarakkeiden tulostamisen jälkeen tulostetaan aina rivinvaihto että päästään
+                // seuraavalle riville.
+                System.out.println();
+            }
+        // Jos taulukolle ei ole varattu muistia kerrotaan siitä käyttäjälle.
+        } else {
+            System.out.println("Taulukolle ei ole varattu muistia.");
+        }
     }
 
     // Metodi saa parametrina tiedoston nimen ja lukee tiedoston merkit kaksiulotteiseen taulukkoon.
