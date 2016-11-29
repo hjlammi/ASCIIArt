@@ -26,6 +26,9 @@ public class ASCIIArt {
             System.out.println("Invalid command-line argument!");
         }
 
+        // Kutsutaan metodia, joka tulostaa heipat.
+        tulostaHeipat();
+
     }
 
     // Metodi tulostaa tervehdyksen.
@@ -55,6 +58,9 @@ public class ASCIIArt {
         System.out.println();
     }
 
+    public static void tulostaHeipat() {
+        System.out.println("Bye, see you soon.");
+    }
 
     // Metodi saa parametrina tiedoston nimen ja lukee tiedoston merkit kaksiulotteiseen taulukkoon.
     public static char[][] luoTaulukko(String tiedostonNimi) {
