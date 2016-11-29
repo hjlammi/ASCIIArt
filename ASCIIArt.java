@@ -26,12 +26,20 @@ public class ASCIIArt {
             if (args.length != 1 || merkit == null) {
                 System.out.println("Invalid command-line argument!");
             } else {
-                tulostaKomennot();
-                // Luetaan käyttäjältä komento.
-                String komento = In.readString();
-                if (komento.equals("printa")) {
-                    tulosta(merkit);
-                }
+                boolean jatketaan = true;
+                do {
+                    tulostaKomennot();
+                    // Luetaan käyttäjältä komento.
+                    String komento = In.readString();
+                    if (komento.equals("printa")) {
+                        tulosta(merkit);
+                    } else if (komento.equals("printi")) {
+                        System.out.println(merkitLukuina(merkkitaulu, merkit));
+                    } else if (komento.equals("quit")) {
+                        tulostaHeipat();
+                        jatketaan = false;
+                    }
+                } while (jatketaan);
             }
         } else {
             System.out.println("Invalid command-line argument!");
