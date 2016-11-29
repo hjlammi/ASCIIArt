@@ -12,6 +12,8 @@ import java.util.*;
 
 public class ASCIIArt {
     public static void main(String[] args) {
+        // Esitellään, luodaan ja alustetaan merkkitaulu.
+        char[] merkkitaulu = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
 
         // Kutsutaan metodia, joka tulostaa tervehdyksen.
         tulostaTervehdys();
@@ -36,7 +38,6 @@ public class ASCIIArt {
             // Kutsutaan metodia, joka tulostaa heipat.
             tulostaHeipat();
         }
-
 
     }
 
@@ -67,10 +68,12 @@ public class ASCIIArt {
         System.out.println();
     }
 
+    // Metodi tulostaa komentorivin.
     public static void tulostaKomennot() {
         System.out.println("printa/printi/info/filter [n]/reset/quit?");
     }
 
+    // Metodi tulostaa heipat.
     public static void tulostaHeipat() {
         System.out.println("Bye, see you soon.");
     }
@@ -96,6 +99,34 @@ public class ASCIIArt {
             System.out.println("Taulukolle ei ole varattu muistia.");
         }
     }
+
+    public static String merkitLukuina(char[] merkkitaulukko, char[][] merkit) {
+        // Verrataan merkit-taulukossa olevaa merkkiä merkkitaulukossa oleviin merkkeihin
+        // ja jos merkit-taulukossa oleva merkki vastaa jotain taulukossa olevaa merkkiä
+        // otetaan sen indeksi ylös luvut-muuttujaan.
+        String luvut = "";
+        for (int i = 0; i < merkit.length; i++) {
+            for (int j = 0; j < merkit[i].length; j++) {
+                for (int k = 0; k < merkkitaulukko.length; k++) {
+                    if (merkit[i][j] == merkkitaulukko[k]) {
+                        if (k >= 0 && k <= 9) {
+                            luvut = luvut + " " + k;
+                        } else {
+                            luvut = luvut + k;
+                        }
+                        if (j < merkit[i].length - 1) {
+                            luvut = luvut + " ";
+                        }
+                    }
+                }
+            }
+            if (i < merkit.length - 1) {
+                luvut = luvut + "\n";
+            }
+        }
+        return luvut;
+    }
+
 
     // Metodi saa parametrina tiedoston nimen ja lukee tiedoston merkit kaksiulotteiseen taulukkoon.
     public static char[][] luoTaulukko(String tiedostonNimi) {

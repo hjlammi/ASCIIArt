@@ -5,9 +5,11 @@ import org.junit.Test;
 public class ASCIIArtTest {
 
     @Test
-    public void ekaRivi() {
-        String tulos = "-------------------";
-        assertEquals(tulos, ASCIIArt.tervehdysMerkkijonona();
+    public void yksiRivi() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
+        char[][] merkit = { { '#', '#', '&', 'x' }, { ';', '#' } };
+        String tulos = " 0  0  2  5\n10  0";
+        assertEquals(tulos, ASCIIArt.merkitLukuina(merkkitaulukko, merkit));
     }
 
 
