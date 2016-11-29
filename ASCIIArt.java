@@ -21,13 +21,15 @@ public class ASCIIArt {
             char[][] merkit = luoTaulukko(tiedostonNimi);
             if (args.length != 1 || merkit == null) {
                 System.out.println("Invalid command-line argument!");
+            } else {
+                tulostaKomennot();
             }
         } else {
             System.out.println("Invalid command-line argument!");
+            // Kutsutaan metodia, joka tulostaa heipat.
+            tulostaHeipat();
         }
 
-        // Kutsutaan metodia, joka tulostaa heipat.
-        tulostaHeipat();
 
     }
 
@@ -56,6 +58,10 @@ public class ASCIIArt {
         }
         // Rivinvaihto.
         System.out.println();
+    }
+
+    public static void tulostaKomennot() {
+        System.out.println("printa/printi/info/filter [n]/reset/quit?");
     }
 
     public static void tulostaHeipat() {
