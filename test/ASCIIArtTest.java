@@ -12,5 +12,11 @@ public class ASCIIArtTest {
         assertEquals(tulos, ASCIIArt.merkitLukuina(merkkitaulukko, merkit));
     }
 
+    @Test
+    public void eiMuistia() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
+        char[][] merkit = null;
+        assertEquals("E", ASCIIArt.merkitLukuina(merkkitaulukko, merkit));
+    }
 
 }

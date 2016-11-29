@@ -104,27 +104,31 @@ public class ASCIIArt {
         // Verrataan merkit-taulukossa olevaa merkkiä merkkitaulukossa oleviin merkkeihin
         // ja jos merkit-taulukossa oleva merkki vastaa jotain taulukossa olevaa merkkiä
         // otetaan sen indeksi ylös luvut-muuttujaan.
-        String luvut = "";
-        for (int i = 0; i < merkit.length; i++) {
-            for (int j = 0; j < merkit[i].length; j++) {
-                for (int k = 0; k < merkkitaulukko.length; k++) {
-                    if (merkit[i][j] == merkkitaulukko[k]) {
-                        if (k >= 0 && k <= 9) {
-                            luvut = luvut + " " + k;
-                        } else {
-                            luvut = luvut + k;
-                        }
-                        if (j < merkit[i].length - 1) {
-                            luvut = luvut + " ";
+        if (merkit != null && merkkitaulukko != null) {
+            String luvut = "";
+            for (int i = 0; i < merkit.length; i++) {
+                for (int j = 0; j < merkit[i].length; j++) {
+                    for (int k = 0; k < merkkitaulukko.length; k++) {
+                        if (merkit[i][j] == merkkitaulukko[k]) {
+                            if (k >= 0 && k <= 9) {
+                                luvut = luvut + " " + k;
+                            } else {
+                                luvut = luvut + k;
+                            }
+                            if (j < merkit[i].length - 1) {
+                                luvut = luvut + " ";
+                            }
                         }
                     }
                 }
+                if (i < merkit.length - 1) {
+                    luvut = luvut + "\n";
+                }
             }
-            if (i < merkit.length - 1) {
-                luvut = luvut + "\n";
-            }
+            return luvut;
+        } else {
+            return "E";
         }
-        return luvut;
     }
 
 
