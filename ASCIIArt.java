@@ -3,8 +3,8 @@
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi
  *
- * Viimeksi muokattu: 29.11.2016.
- *
+ * Viimeksi muokattu: 30.11.2016.
+ * Käytetty aika: 5 +
  *
  */
 import java.io.*;
@@ -137,6 +137,19 @@ public class ASCIIArt {
         } else {
             return "E";
         }
+    }
+
+    // Metodi saa parametreina merkkitaulukon ja merkin ja palauttaa merkkiä vastaavan indeksiarvon.
+    public static int muutaMerkkiNumeroksi(char[] merkkitaulukko, char merkki) {
+        boolean merkkiLoytyi = false;
+        int luku = -1;
+        for (int k = 0; k < merkkitaulukko.length && !merkkiLoytyi; k++) {
+            if (merkki == merkkitaulukko[k]) {
+                luku = k;
+                merkkiLoytyi = true;
+            }
+        }
+        return luku;
     }
 
 

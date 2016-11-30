@@ -5,7 +5,7 @@ import org.junit.Test;
 public class ASCIIArtTest {
 
     @Test
-    public void yksiRivi() {
+    public void kaksiRivia() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
         char[][] merkit = { { '#', '#', '&', 'x' }, { ';', '#' } };
         String tulos = " 0  0  2  5\n10  0";
@@ -17,6 +17,12 @@ public class ASCIIArtTest {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
         char[][] merkit = null;
         assertEquals("E", ASCIIArt.merkitLukuina(merkkitaulukko, merkit));
+    }
+
+    @Test
+    public void tahtiKuusi() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
+        assertEquals(6, ASCIIArt.muutaMerkkiNumeroksi(merkkitaulukko, '*'));
     }
 
 }
