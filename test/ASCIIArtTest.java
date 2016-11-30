@@ -64,4 +64,12 @@ public class ASCIIArtTest {
         char[][] merkit = { { '#', '#' }, { ';', '#' } };
         assertEquals(0, ASCIIArt.merkinLkmTaulukossa('*', merkit));
     }
+
+    @Test
+    public void infoJaKoko() {
+        char[][] merkit = { { '#', '#' }, { ';', '#' } };
+        String tulos = "info\n2 x 2";
+        assertEquals(tulos, ASCIIArt.infoMjonona(merkit));
+    }
+
 }
