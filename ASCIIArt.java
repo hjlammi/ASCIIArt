@@ -48,7 +48,6 @@ public class ASCIIArt {
             // Kutsutaan metodia, joka tulostaa heipat.
             tulostaHeipat();
         }
-
     }
 
     // Metodi tulostaa tervehdyksen.
@@ -265,4 +264,22 @@ public class ASCIIArt {
         int leveys = merkit[0].length;
         return leveys;
     }
+
+    public static int merkinLkmTaulukossa(char merkki, char[][] merkit) {
+        int lkm = 0;
+        // Käydään merkit-taulukko läpi ja pidetään kirjaa merkkien esiintymistä siinä.
+        for (int i = 0; i < merkit.length; i++) {
+            for (int j = 0; j < merkit[i].length; j++) {
+                if (merkit[i][j] == merkki) {
+                    lkm++;
+                }
+            }
+        }
+        return lkm;
+    }
+
+    /*public static String infoMjonona(char[] merkkitaulukko, char merkit) {
+        String info = "";
+        return info;
+    }*/
 }

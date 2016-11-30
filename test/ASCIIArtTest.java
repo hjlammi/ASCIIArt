@@ -53,4 +53,9 @@ public class ASCIIArtTest {
         assertEquals(2, ASCIIArt.taulukonLeveys(merkit));
     }
 
+    @Test
+    public void kolmeRisuaitaa() {
+        char[][] merkit = { { '#', '#' }, { ';', '#' } };
+        assertEquals(3, ASCIIArt.merkinLkmTaulukossa('#', merkit));
+    }
 }
