@@ -278,9 +278,17 @@ public class ASCIIArt {
         return lkm;
     }
 
-    public static String infoMjonona(char[][] merkit) {
+    public static String infoMjonona(char[] merkkitaulukko, char[][] merkit) {
         String info = "info";
-        info = info + "\n" + taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit);
+        info = info + "\n" + taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit) + "\n";
+        for (int i = 0; i < merkkitaulukko.length; i++) {
+            char merkki = merkkitaulukko[i];
+            int merkinLkm = merkinLkmTaulukossa(merkki, merkit);
+            info = info + merkki + " " + merkinLkm;
+            if (i < merkkitaulukko.length - 1) {
+                info = info + "\n";
+            }
+        }
         return info;
     }
 }
