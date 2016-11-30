@@ -294,25 +294,67 @@ public class ASCIIArt {
         return info;
     }
 
-    public static int[][] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit) {
+    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit) {
 
         if (merkkitaulukko != null && merkit != null) {
             int rivienLkm = merkit.length;
             int sarakkeidenLkm = merkit.length > 0 ? merkit[0].length : 0;
+            int taulukonKoko = rivienLkm * sarakkeidenLkm;
 
-            int[][] luvut = new int [rivienLkm][sarakkeidenLkm];
+            int[] luvut = new int [taulukonKoko];
+            int lukujenInd = 0;
             // Käydään kaksiulotteinen merkit-taulukko läpi ja muutetaan merkki sitä vastaavaksi luvuksi.
             for (int i = 0; i < merkit.length; i++) {
                 for (int j = 0; j < merkit[i].length; j++) {
                     char merkki = merkit[i][j];
                     int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
                     // System.out.println(merkkiLukuna);
-                    luvut[i][j] = merkkiLukuna;
+                    luvut[lukujenInd] = merkkiLukuna;
+                    lukujenInd++;
                 }
             }
             return luvut;
         } else {
             return null;
+        }
+    }
+
+    // Metodi lajittelee parametrina saamansa taulukon arvot valintalajittelun avulla
+    // ja antaa paluuarvona totuusarvon sen mukaan, onko taulukolle varattu muistia vai ei.
+    public static boolean lajittele(int[] arvot) {
+
+        // Tarkistetaan että on varattu muistia.
+        if (arvot != null) {
+            // Suoritetaan silmukkaa niin kauan kuin saadaan taulukko käytyä läpi.
+            for (int i = 0; i < arvot.length; i++) {
+                // Esitellään ja alustetaan muuttuja sijoittamalla sinne indeksissä oleva arvo.
+                int pieninLuku = arvot[i];
+                // Esitellään ja alustetaan muuttuja sijoittamalla sinne indeksi.
+                int pienimmanIndeksi = i;
+
+                // Alustetaan indeksilaskuri samalla arvolla kuin ulompi silmukka ja suoritetaan
+                // silmukkaa niin kauan kuin päästään taulukko loppuun.
+                for (int j = i; j < arvot.length; j++) {
+                    // Jos indeksissä oleva arvo on pienempi kuin sen hetkinen pienin luku,
+                    // muuttuja saa uudeksi arvoksi kyseisessä indeksissä olevan arvon.
+                    if (arvot[j] < pieninLuku) {
+                        pieninLuku = arvot[j];
+                        // Kirjataan ylös myös indeksi, josta pienin arvo löytyi.
+                        pienimmanIndeksi = j;
+                    }
+                }
+
+                // Esitellään ja alustetaan muuttuja indeksistä i löytyvällä arvolla.
+                int ekaLajittelematon = arvot[i];
+                // Vaihdetaan lukujen paikkaa sijoittamalla pienin luku taulukon indeksiin i
+                // ja sijoittamalla arvo ekasta lajittelemattomasta pienimmän indeksiin.
+                arvot[i] = pieninLuku;
+                arvot[pienimmanIndeksi] = ekaLajittelematon;
+            }
+            // Paluuarvona saadaan tosi, jos muistia on varattu, muuten epätosi.
+            return true;
+        } else {
+            return false;
         }
     }
 }

@@ -79,9 +79,7 @@ public class ASCIIArtTest {
         char[][] merkit = { { '#', '#', '&' },
                             { '&', '#', '%' },
                             { '#', '#', '&' } };
-        int[][] luvut = { { 0, 0, 2 },
-                          { 2, 0, 4 },
-                          { 0, 0, 2 } };
+        int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
         assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
     }
 
@@ -89,7 +87,7 @@ public class ASCIIArtTest {
     public void tyhjaTaulukko() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = {};
-        int[][] luvut = {};
+        int[] luvut = {};
         assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
     }
 
