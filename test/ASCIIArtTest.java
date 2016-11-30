@@ -73,4 +73,16 @@ public class ASCIIArtTest {
         assertEquals(tulos, ASCIIArt.infoMjonona(merkkitaulukko, merkit));
     }
 
+    @Test
+    public void filter3x3() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '#', '&' },
+                            { '&', '#', '%' },
+                            { '#', '#', '&' } };
+        int[][] luvut = { { 0, 0, 2 },
+                          { 2, 0, 4 },
+                          { 0, 0, 2 } };
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
+    }
+
 }
