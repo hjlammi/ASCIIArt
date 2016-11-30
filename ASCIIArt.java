@@ -38,6 +38,8 @@ public class ASCIIArt {
                     } else if (komento.equals("quit")) {
                         tulostaHeipat();
                         jatketaan = false;
+                    } else {
+                        System.out.println("Invalid command!");
                     }
                 } while (jatketaan);
             }
@@ -121,7 +123,7 @@ public class ASCIIArt {
                     String lukuMjonona = muutaLukuMjonoksi(luku);
                     luvut = luvut + lukuMjonona;
                     if (j < merkit[i].length - 1) {
-                                luvut = luvut + " ";
+                        luvut = luvut + " ";
                     }
                 }
                 if (i < merkit.length - 1) {
@@ -250,5 +252,10 @@ public class ASCIIArt {
         }
         // Palautetaan merkit-taulukko.
         return merkit;
+    }
+
+    public static int taulukonKorkeus(char[][] merkit) {
+        int leveys = merkit.length;
+        return leveys;
     }
 }

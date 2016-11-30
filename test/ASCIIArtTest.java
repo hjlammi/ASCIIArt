@@ -41,4 +41,10 @@ public class ASCIIArtTest {
         assertEquals("15", ASCIIArt.muutaLukuMjonoksi(15));
     }
 
+    @Test
+    public void leveysKaksi() {
+        char[][] merkit = { { '#', '#' }, { ';', '#' } };
+        assertEquals(2, ASCIIArt.taulukonKorkeus(merkit));
+    }
+
 }
