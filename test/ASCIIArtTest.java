@@ -31,4 +31,14 @@ public class ASCIIArtTest {
         assertEquals(-1, ASCIIArt.muutaMerkkiNumeroksi(merkkitaulukko, 'U'));
     }
 
+    @Test
+    public void kuusiMjonona() {
+        assertEquals(" 6", ASCIIArt.muutaLukuMjonoksi(6));
+    }
+
+    @Test
+    public void kaksinumeroinenMjonona() {
+        assertEquals("15", ASCIIArt.muutaLukuMjonoksi(15));
+    }
+
 }

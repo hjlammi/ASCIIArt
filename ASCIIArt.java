@@ -116,17 +116,12 @@ public class ASCIIArt {
             String luvut = "";
             for (int i = 0; i < merkit.length; i++) {
                 for (int j = 0; j < merkit[i].length; j++) {
-                    for (int k = 0; k < merkkitaulukko.length; k++) {
-                        if (merkit[i][j] == merkkitaulukko[k]) {
-                            if (k >= 0 && k <= 9) {
-                                luvut = luvut + " " + k;
-                            } else {
-                                luvut = luvut + k;
-                            }
-                            if (j < merkit[i].length - 1) {
+                    char merkki = merkit[i][j];
+                    int luku = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
+                    String lukuMjonona = muutaLukuMjonoksi(luku);
+                    luvut = luvut + lukuMjonona;
+                    if (j < merkit[i].length - 1) {
                                 luvut = luvut + " ";
-                            }
-                        }
                     }
                 }
                 if (i < merkit.length - 1) {
@@ -158,6 +153,21 @@ public class ASCIIArt {
         return luku;
     }
 
+    // Metodi saa parametrina luvun, jonka se muuttaa merkkijonoksi.
+    public static String muutaLukuMjonoksi(int luku) {
+        // Merkkijono on aluksi tyhjä.
+        String lukuMjonona = "";
+        // Jos luku on välillä 0 - 9, lisätään luvun eteen välilyönti.
+        if (luku >= 0 && luku <= 9) {
+            lukuMjonona = " " + luku;
+        // Muiden lukujen kohdalla tyyppimuunnetaan luku merkkijonoksi lisäämällä
+        // se tyhjään merkkijonoon.
+        } else {
+            lukuMjonona = "" + luku;
+        }
+        // Paluuarvona saadaan luku merkkijonona.
+        return lukuMjonona;
+    }
 
     // Metodi saa parametrina tiedoston nimen ja lukee tiedoston merkit kaksiulotteiseen taulukkoon.
     public static char[][] luoTaulukko(String tiedostonNimi) {
