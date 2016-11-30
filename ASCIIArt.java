@@ -255,7 +255,14 @@ public class ASCIIArt {
     }
 
     public static int taulukonKorkeus(char[][] merkit) {
-        int leveys = merkit.length;
+        int korkeus = merkit.length;
+        return korkeus;
+    }
+
+    // Metodi palauttaa parametrina saamansa taulukon leveyden.
+    // Oletetaan, että kaikki rivit  ovat yhtä leveitä.
+    public static int taulukonLeveys(char[][] merkit) {
+        int leveys = merkit[0].length;
         return leveys;
     }
 }

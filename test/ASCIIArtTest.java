@@ -42,9 +42,15 @@ public class ASCIIArtTest {
     }
 
     @Test
-    public void leveysKaksi() {
+    public void korkeusKaksi() {
         char[][] merkit = { { '#', '#' }, { ';', '#' } };
         assertEquals(2, ASCIIArt.taulukonKorkeus(merkit));
+    }
+
+    @Test
+    public void leveysKaksi() {
+        char[][] merkit = { { '#', '#' }, { ';', '#' } };
+        assertEquals(2, ASCIIArt.taulukonLeveys(merkit));
     }
 
 }
