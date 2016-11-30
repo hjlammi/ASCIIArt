@@ -91,4 +91,11 @@ public class ASCIIArtTest {
         assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
     }
 
+    @Test
+    public void lajittelu() {
+        int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0 };
+        ASCIIArt.lajittele(luvut);
+        assertArrayEquals(new int[]{ 0, 0, 0, 0, 0, 2, 2, 4 }, luvut);
+    }
+
 }
