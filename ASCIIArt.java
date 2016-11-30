@@ -35,6 +35,8 @@ public class ASCIIArt {
                         tulosta(merkit);
                     } else if (komento.equals("printi")) {
                         System.out.println(merkitLukuina(merkkitaulu, merkit));
+                    } else if (komento.equals("info")){
+                        System.out.println(infoMjonona(merkkitaulu, merkit));
                     } else if (komento.equals("quit")) {
                         tulostaHeipat();
                         jatketaan = false;
@@ -279,8 +281,8 @@ public class ASCIIArt {
     }
 
     public static String infoMjonona(char[] merkkitaulukko, char[][] merkit) {
-        String info = "info";
-        info = info + "\n" + taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit) + "\n";
+        String info = "";
+        info = info + taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit) + "\n";
         for (int i = 0; i < merkkitaulukko.length; i++) {
             char merkki = merkkitaulukko[i];
             int merkinLkm = merkinLkmTaulukossa(merkki, merkit);

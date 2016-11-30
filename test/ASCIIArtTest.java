@@ -69,7 +69,7 @@ public class ASCIIArtTest {
     public void infoKokoJaMerkit() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '#' }, { '&', '#' } };
-        String tulos = "info\n2 x 2\n# 3\n@ 0\n& 1\n$ 0\n% 0";
+        String tulos = "2 x 2\n# 3\n@ 0\n& 1\n$ 0\n% 0";
         assertEquals(tulos, ASCIIArt.infoMjonona(merkkitaulukko, merkit));
     }
 
