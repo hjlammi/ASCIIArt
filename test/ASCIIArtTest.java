@@ -98,4 +98,10 @@ public class ASCIIArtTest {
         assertArrayEquals(new int[]{ 0, 0, 0, 0, 0, 2, 2, 4 }, luvut);
     }
 
+    @Test
+    public void mediaaniOnNolla() {
+        int[] luvut = { 0, 0, 0, 0, 0, 2, 2, 4 };
+        assertEquals(0, ASCIIArt.mediaani(luvut));
+    }
+
 }

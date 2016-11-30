@@ -357,4 +357,27 @@ public class ASCIIArt {
             return false;
         }
     }
+
+    // Metodi etsii mediaanin taulukosta, jonka se saa parametrina ja palauttaa double-tyyppisen
+    // luvun.
+    public static int mediaani(int[] luvut) {
+        // Sijoitetaan muuttujaan taulukossa olevien lukujen lukumäärä.
+        int lukujenLkm = luvut.length;
+        // Esitellään muuttuja.
+        int mediaani;
+
+        // Jos taulukolle on varattu muistia, etsitään mediaani. Muussa tapauksessa
+        // palautetaan virheilmoitus.
+        if (luvut != null) {
+            // Saadaan keskimmainen indeksi jakamalla lukujen määrä kahdella. Tyyppimuunnos
+            // pyöristää luvun alaspäin.
+            int keskimmainenIndeksi = lukujenLkm / 2;
+            // Luetaan mediaanin arvo taulukon keskimmäisestä indeksistä.
+            mediaani = luvut[keskimmainenIndeksi];
+            // Paluuarvona saadaan double-tyyppinen mediaani (tai virheilmoitus).
+            return mediaani;
+        } else {
+            return -1;
+        }
+    }
 }
