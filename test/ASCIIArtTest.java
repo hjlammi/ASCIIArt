@@ -58,4 +58,10 @@ public class ASCIIArtTest {
         char[][] merkit = { { '#', '#' }, { ';', '#' } };
         assertEquals(3, ASCIIArt.merkinLkmTaulukossa('#', merkit));
     }
+
+    @Test
+    public void nollaTahtea() {
+        char[][] merkit = { { '#', '#' }, { ';', '#' } };
+        assertEquals(0, ASCIIArt.merkinLkmTaulukossa('*', merkit));
+    }
 }
