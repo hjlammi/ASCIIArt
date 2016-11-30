@@ -25,4 +25,10 @@ public class ASCIIArtTest {
         assertEquals(6, ASCIIArt.muutaMerkkiNumeroksi(merkkitaulukko, '*'));
     }
 
+    @Test
+    public void merkkiaEiLoydy() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
+        assertEquals(-1, ASCIIArt.muutaMerkkiNumeroksi(merkkitaulukko, 'U'));
+    }
+
 }

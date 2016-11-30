@@ -142,13 +142,19 @@ public class ASCIIArt {
     // Metodi saa parametreina merkkitaulukon ja merkin ja palauttaa merkkiä vastaavan indeksiarvon.
     public static int muutaMerkkiNumeroksi(char[] merkkitaulukko, char merkki) {
         boolean merkkiLoytyi = false;
+        // Esitellään ja alustetaan luku luvulla, jota ei löydy merkkitaulukon indekseistä.
         int luku = -1;
+        // Käydään läpi merkkitaulukkoa ja verrataan siihen merkkiä niin kauan kuin merkkitaulukkoa on jäljellä
+        // tai merkki on löytynyt.
         for (int k = 0; k < merkkitaulukko.length && !merkkiLoytyi; k++) {
             if (merkki == merkkitaulukko[k]) {
+                // Sijoitetaan muuttujaan merkkiä vastaava indeksiarvo.
                 luku = k;
+                // Käännetään lippu löytymisen merkiksi.
                 merkkiLoytyi = true;
             }
         }
+        // Paluuarvona saadaan luku.
         return luku;
     }
 
