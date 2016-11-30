@@ -255,6 +255,10 @@ public class ASCIIArt {
         return merkit;
     }
 
+
+
+    // Info
+
     public static int taulukonKorkeus(char[][] merkit) {
         int korkeus = merkit.length;
         return korkeus;
@@ -294,17 +298,20 @@ public class ASCIIArt {
         return info;
     }
 
-    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit) {
-        if (merkkitaulukko != null && merkit != null) {
-            int rivienLkm = merkit.length;
-            int sarakkeidenLkm = merkit.length > 0 ? merkit[0].length : 0;
-            int taulukonKoko = rivienLkm * sarakkeidenLkm;
 
-            int[] luvut = new int [taulukonKoko];
+
+
+    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit, int koko) {
+        if (merkkitaulukko != null && merkit != null) {
+            int rivienLkm = koko;
+            int sarakkeidenLkm = koko;
+            int filtterinKoko = rivienLkm * sarakkeidenLkm;
+
+            int[] luvut = new int[filtterinKoko];
             int lukujenInd = 0;
             // Käydään kaksiulotteinen merkit-taulukko läpi ja muutetaan merkki sitä vastaavaksi luvuksi.
-            for (int i = 0; i < merkit.length; i++) {
-                for (int j = 0; j < merkit[i].length; j++) {
+            for (int i = 0; i < koko; i++) {
+                for (int j = 0; j < koko; j++) {
                     char merkki = merkit[i][j];
                     int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
                     luvut[lukujenInd] = merkkiLukuna;
@@ -316,6 +323,7 @@ public class ASCIIArt {
             return null;
         }
     }
+
 
     public static char muutaLukuMerkiksi(char[] merkkitaulukko, int luku) {
         // Käydään läpi merkkitaulukkoa, kunnes löydetään lukua vastaava merkki.
@@ -390,5 +398,8 @@ public class ASCIIArt {
         } else {
             return -1;
         }
+    }
+
+    public static void filtteroi(char[][] merkit) {
     }
 }
