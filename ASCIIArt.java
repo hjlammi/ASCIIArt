@@ -295,16 +295,24 @@ public class ASCIIArt {
     }
 
     public static int[][] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit) {
-        int[][] luvut = new int [merkit.length][merkit[0].length];
-        // Käydään kaksiulotteinen merkit-taulukko läpi ja muutetaan merkki sitä vastaavaksi luvuksi.
-        for (int i = 0; i < merkit.length; i++) {
-            for (int j = 0; j < merkit[i].length; j++) {
-                char merkki = merkit[i][j];
-                int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
-                // System.out.println(merkkiLukuna);
-                luvut[i][j] = merkkiLukuna;
+
+        if (merkkitaulukko != null && merkit != null) {
+            int rivienLkm = merkit.length;
+            int sarakkeidenLkm = merkit.length > 0 ? merkit[0].length : 0;
+
+            int[][] luvut = new int [rivienLkm][sarakkeidenLkm];
+            // Käydään kaksiulotteinen merkit-taulukko läpi ja muutetaan merkki sitä vastaavaksi luvuksi.
+            for (int i = 0; i < merkit.length; i++) {
+                for (int j = 0; j < merkit[i].length; j++) {
+                    char merkki = merkit[i][j];
+                    int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
+                    // System.out.println(merkkiLukuna);
+                    luvut[i][j] = merkkiLukuna;
+                }
             }
+            return luvut;
+        } else {
+            return null;
         }
-        return luvut;
     }
 }

@@ -85,4 +85,12 @@ public class ASCIIArtTest {
         assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
     }
 
+    @Test
+    public void tyhjaTaulukko() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = {};
+        int[][] luvut = {};
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit));
+    }
+
 }
