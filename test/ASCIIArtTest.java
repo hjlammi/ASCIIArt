@@ -104,4 +104,10 @@ public class ASCIIArtTest {
         assertEquals(0, ASCIIArt.mediaani(luvut));
     }
 
+    @Test
+    public void merkkiOnAt() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        assertEquals('@', ASCIIArt.muutaLukuMerkiksi(merkkitaulukko, 1));
+    }
+
 }

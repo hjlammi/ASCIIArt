@@ -295,7 +295,6 @@ public class ASCIIArt {
     }
 
     public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit) {
-
         if (merkkitaulukko != null && merkit != null) {
             int rivienLkm = merkit.length;
             int sarakkeidenLkm = merkit.length > 0 ? merkit[0].length : 0;
@@ -308,7 +307,6 @@ public class ASCIIArt {
                 for (int j = 0; j < merkit[i].length; j++) {
                     char merkki = merkit[i][j];
                     int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
-                    // System.out.println(merkkiLukuna);
                     luvut[lukujenInd] = merkkiLukuna;
                     lukujenInd++;
                 }
@@ -317,6 +315,19 @@ public class ASCIIArt {
         } else {
             return null;
         }
+    }
+
+    public static char muutaLukuMerkiksi(char[] merkkitaulukko, int luku) {
+        // Käydään läpi merkkitaulukkoa, kunnes löydetään lukua vastaava merkki.
+        char merkki = 'K';
+        boolean merkkiLoytyi = false;
+        for (int i = 0; i < merkkitaulukko.length && !merkkiLoytyi; i++) {
+            if (i == luku) {
+                merkki = merkkitaulukko[i];
+                merkkiLoytyi = true;
+            }
+        }
+        return merkki;
     }
 
     // Metodi lajittelee parametrina saamansa taulukon arvot valintalajittelun avulla
