@@ -299,7 +299,7 @@ public class ASCIIArt {
     }
 
 
-
+    // Filtteröinti.
 
     public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit, int koko) {
         if (merkkitaulukko != null && merkit != null) {
@@ -400,25 +400,40 @@ public class ASCIIArt {
         }
     }
 
-    public static char filtteroiPaikka(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
-        int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
-        lajittele(merkkejaVastaavatLuvut);
-        int mediaani = mediaani(merkkejaVastaavatLuvut);
-        char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
+    public static boolean paikanVoiFiltteroida(int rivienLkm, int sarakkeidenLkm,
+    int suodattimenKoko, int rivi, int sarake) {
+        boolean voiFiltteroida = false;
+        if (rivi > 0 && sarake > 0) {
+            voiFiltteroida = true;
+        } else {
+            voiFiltteroida = false;
+        }
+        return voiFiltteroida;
+    }
 
+    public static char filtteroiPaikka(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
         char palautettavaMerkki = '0';
-        // Jos ei ole filtterin keskipisteessä, palautetaan paikassa oleva merkki.
-        // Muuten palautetaan uusi mediaania vastaava merkki.
-        for (int i = 0; i < koko; i++) {
-            for (int j = 0; j < koko; j++) {
-                if (merkit[i][j] == merkit[rivi][sarake]){
-                    palautettavaMerkki = lukuaVastaavaMerkki;
-                // } else {
-                    // palautettavaMerkki = merkit[i][j];
+        boolean filtteroitavaMerkkiLoytyi = false;
+        // Jos koordinaatti on liian lähellä reunaa, palautetaan reunassa oleva merkki.
+        for (int i = 0; i < koko && !filtteroitavaMerkkiLoytyi; i++) {
+            for (int j = 0; j < koko && !filtteroitavaMerkkiLoytyi; j++) {
+                if (merkit[i] == merkit[0] || merkit[j] == merkit[0]) {
+                    palautettavaMerkki = merkit[i][j];
+                    // System.out.println(palautettavaMerkki);
+                } else {
+                    int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
+                    lajittele(merkkejaVastaavatLuvut);
+                    int mediaani = mediaani(merkkejaVastaavatLuvut);
+                    char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
+                    // System.out.println(lukuaVastaavaMerkki);
+                    // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
+                    if (merkit[i][j] == merkit[rivi][sarake]){
+                        palautettavaMerkki = lukuaVastaavaMerkki;
+                        filtteroitavaMerkkiLoytyi = true;
+                    }
                 }
             }
         }
-
         return palautettavaMerkki;
     }
 

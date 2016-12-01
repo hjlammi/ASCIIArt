@@ -150,4 +150,19 @@ public class ASCIIArtTest {
         assertEquals(1, ASCIIArt.filtteroitavaSarake(merkit, 3));
     }
 
+    /*@Test
+    public void paikkaNollaNollaPysyySamana() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '%' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '$' },
+                            { '#', '&', '%', '$' } };
+        assertEquals('#', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 1, 1));
+    }*/
+
+    @Test
+    public void suodatin3YksYks() {
+        assertEquals(true, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 1, 1));
+    }
+
 }
