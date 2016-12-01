@@ -4,7 +4,7 @@
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi
  *
  * Viimeksi muokattu: 1.12.2016.
- * Käytetty aika: 5 + 8
+ * Käytetty aika: 5 + 8 + 3
  *
  */
 import java.io.*;
@@ -403,11 +403,10 @@ public class ASCIIArt {
     public static boolean paikanVoiFiltteroida(int rivienLkm, int sarakkeidenLkm,
     int filtterinKoko, int rivi, int sarake) {
         boolean voiFiltteroida = false;
-        int oikeaReuna = sarakkeidenLkm - 1;
-        int alaReuna = rivienLkm - 1;
         int filtterinReuna = filtterinKoko / 2;
-        System.out.println(filtterinReuna);
-        if ((rivi > filtterinReuna - 1) && (sarake > filtterinReuna - 1) && sarake < oikeaReuna && rivi < alaReuna) {
+        int oikeaReuna = sarakkeidenLkm - filtterinReuna;
+        int alaReuna = rivienLkm - filtterinReuna;
+        if ((rivi > filtterinReuna - 1) && (sarake > filtterinReuna - 1) && (sarake < oikeaReuna) && (rivi < alaReuna)) {
             voiFiltteroida = true;
         } else {
             voiFiltteroida = false;

@@ -185,6 +185,11 @@ public class ASCIIArtTest {
         assertEquals(false, ASCIIArt.paikanVoiFiltteroida(5, 5, 5, 1, 1));
     }
 
+    @Test
+    public void suodatin5KolmeKolme() {
+        assertEquals(false, ASCIIArt.paikanVoiFiltteroida(5, 5, 5, 3, 3));
+    }
+
 
 
 }
