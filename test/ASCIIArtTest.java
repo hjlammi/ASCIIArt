@@ -190,5 +190,28 @@ public class ASCIIArtTest {
         assertEquals('#', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 0, 0));
     }
 
+    @Test
+    public void paikkaKolmeKolmePysyySamana() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '%', '&' },
+                            { '&', '#', '%', '#', '%' },
+                            { '#', '&', '&', '$', '$' },
+                            { '#', '&', '%', '$', '#' },
+                            { '#', '&', '&', '$', '$' } };
+        assertEquals('$', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 5, 3, 3));
+    }
+
+    @Test
+    public void paikkaKaksiKaksiFiltteroidaan() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '%', '&' },
+                            { '&', '#', '%', '#', '%' },
+                            { '#', '&', '&', '$', '$' },
+                            { '#', '&', '%', '$', '#' },
+                            { '#', '&', '&', '$', '$' } };
+        assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 5, 2, 2));
+    }
+
+
 
 }
