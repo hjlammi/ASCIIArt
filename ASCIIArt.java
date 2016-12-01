@@ -428,6 +428,12 @@ public class ASCIIArt {
         return rivi;
     }
 
+    public static int filtteroitavaSarake(char[][] merkit, int koko) {
+        int rivi = -1;
+        rivi = koko / 2;
+        return rivi;
+    }
+
 
 
     /*public static void filtteroi(char[] merkkitaulukko, char[][] merkit, int koko) {

@@ -141,5 +141,13 @@ public class ASCIIArtTest {
         assertEquals(2, ASCIIArt.filtteroitavaRivi(merkit, 5));
     }
 
+    @Test
+    public void SarakeYksi() {
+        char[][] merkit = { { '#', '&', '&', '%' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '$' },
+                            { '#', '&', '%', '$' } };
+        assertEquals(1, ASCIIArt.filtteroitavaSarake(merkit, 3));
+    }
 
 }
