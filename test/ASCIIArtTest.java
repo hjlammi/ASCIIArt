@@ -132,4 +132,14 @@ public class ASCIIArtTest {
         assertEquals(1, ASCIIArt.filtteroitavaRivi(merkit, 3));
     }
 
+    @Test
+    public void riviYksiKokoViisi() {
+        char[][] merkit = { { '#', '&', '&', '%' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '$' },
+                            { '#', '&', '%', '$' } };
+        assertEquals(2, ASCIIArt.filtteroitavaRivi(merkit, 5));
+    }
+
+
 }

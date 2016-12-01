@@ -423,7 +423,9 @@ public class ASCIIArt {
     }
 
     public static int filtteroitavaRivi(char[][] merkit, int koko) {
-        return koko / 2;
+        int rivi = -1;
+        rivi = koko / 2;
+        return rivi;
     }
 
 
