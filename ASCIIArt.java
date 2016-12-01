@@ -401,11 +401,13 @@ public class ASCIIArt {
     }
 
     public static boolean paikanVoiFiltteroida(int rivienLkm, int sarakkeidenLkm,
-    int suodattimenKoko, int rivi, int sarake) {
+    int filtterinKoko, int rivi, int sarake) {
         boolean voiFiltteroida = false;
         int oikeaReuna = sarakkeidenLkm - 1;
         int alaReuna = rivienLkm - 1;
-        if (rivi > 0 && sarake > 0 && sarake < oikeaReuna && rivi < alaReuna) {
+        int filtterinReuna = filtterinKoko / 2;
+        System.out.println(filtterinReuna);
+        if ((rivi > filtterinReuna - 1) && (sarake > filtterinReuna - 1) && sarake < oikeaReuna && rivi < alaReuna) {
             voiFiltteroida = true;
         } else {
             voiFiltteroida = false;
