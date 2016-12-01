@@ -165,4 +165,9 @@ public class ASCIIArtTest {
         assertEquals(true, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 1, 1));
     }
 
+    @Test
+    public void suodatin3NollaNolla() {
+        assertEquals(false, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 0, 0));
+    }
+
 }
