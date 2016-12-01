@@ -113,19 +113,14 @@ public class ASCIIArtTest {
         assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3));
     }
 
-    /*@Test
-    public void filtteroi3x3() {
+    @Test
+    public void paikkaYksYks() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '&', '&', '%' },
                             { '&', '#', '%', '#' },
                             { '#', '&', '&', '$' },
                             { '#', '&', '%', '$' } };
-        ASCIIArt.filtteroi(merkit);
-        assertArrayEquals(new char[][]
-                          { { '#', '&', '&', '%' },
-                            { '&', '&', '%', '#' },
-                            { '#', '&', '&', '$' },
-                            { '#', '&', '%', '$' } }, merkit);
-    }*/
+        assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 1, 1));
+    }
 
 }

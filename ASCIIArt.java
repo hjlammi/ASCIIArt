@@ -3,8 +3,8 @@
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi
  *
- * Viimeksi muokattu: 30.11.2016.
- * Käytetty aika: 5 +
+ * Viimeksi muokattu: 1.12.2016.
+ * Käytetty aika: 5 + 8
  *
  */
 import java.io.*;
@@ -400,6 +400,34 @@ public class ASCIIArt {
         }
     }
 
-    public static void filtteroi(char[][] merkit) {
+    public static char filtteroiPaikka(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
+        int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
+        lajittele(merkkejaVastaavatLuvut);
+        int mediaani = mediaani(merkkejaVastaavatLuvut);
+        char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
+
+        char palautettavaMerkki = '0';
+        // Jos ei ole filtterin keskipisteessä, palautetaan paikassa oleva merkki.
+        // Muuten palautetaan uusi mediaania vastaava merkki.
+        for (int i = 0; i < koko; i++) {
+            for (int j = 0; j < koko; j++) {
+                if (merkit[i][j] == merkit[rivi][sarake]){
+                    palautettavaMerkki = lukuaVastaavaMerkki;
+                } else {
+                    palautettavaMerkki = merkit[i][j];
+                }
+            }
+        }
+
+        return palautettavaMerkki;
     }
+
+
+
+    /*public static void filtteroi(char[] merkkitaulukko, char[][] merkit, int koko) {
+        int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
+        lajittele(merkkejaVastaavatLuvut);
+        int mediaani = mediaani(merkkejaVastaavatLuvut);
+        char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
+    }*/
 }
