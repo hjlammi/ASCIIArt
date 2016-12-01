@@ -416,26 +416,19 @@ public class ASCIIArt {
 
     public static char filtteroiPaikka(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
         char palautettavaMerkki = '0';
-        boolean filtteroitavaMerkkiLoytyi = false;
+        int rivienLkm = merkit.length;
+        int sarakkeidenLkm = merkit[0].length;
+        boolean voiFiltteroida = paikanVoiFiltteroida(rivienLkm, sarakkeidenLkm, koko, rivi, sarake);
         // Jos koordinaatti on liian lähellä reunaa, palautetaan reunassa oleva merkki.
-        for (int i = 0; i < koko && !filtteroitavaMerkkiLoytyi; i++) {
-            for (int j = 0; j < koko && !filtteroitavaMerkkiLoytyi; j++) {
-                if (merkit[i] == merkit[0] || merkit[j] == merkit[0]) {
-                    palautettavaMerkki = merkit[i][j];
-                    // System.out.println(palautettavaMerkki);
-                } else {
-                    int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
-                    lajittele(merkkejaVastaavatLuvut);
-                    int mediaani = mediaani(merkkejaVastaavatLuvut);
-                    char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
-                    // System.out.println(lukuaVastaavaMerkki);
-                    // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
-                    if (merkit[i][j] == merkit[rivi][sarake]){
-                        palautettavaMerkki = lukuaVastaavaMerkki;
-                        filtteroitavaMerkkiLoytyi = true;
-                    }
-                }
-            }
+        if (!voiFiltteroida) {
+            palautettavaMerkki = merkit[rivi][sarake];
+        } else {
+            int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
+            lajittele(merkkejaVastaavatLuvut);
+            int mediaani = mediaani(merkkejaVastaavatLuvut);
+            char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
+            // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
+            palautettavaMerkki = lukuaVastaavaMerkki;
         }
         return palautettavaMerkki;
     }
