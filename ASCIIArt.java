@@ -404,7 +404,8 @@ public class ASCIIArt {
     int suodattimenKoko, int rivi, int sarake) {
         boolean voiFiltteroida = false;
         int oikeaReuna = sarakkeidenLkm - 1;
-        if (rivi > 0 && sarake > 0 && sarake < oikeaReuna) {
+        int alaReuna = rivienLkm - 1;
+        if (rivi > 0 && sarake > 0 && sarake < oikeaReuna && rivi < alaReuna) {
             voiFiltteroida = true;
         } else {
             voiFiltteroida = false;
