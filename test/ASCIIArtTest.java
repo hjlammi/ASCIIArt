@@ -114,13 +114,22 @@ public class ASCIIArtTest {
     }
 
     @Test
-    public void paikkaYksYks() {
+    public void paikkaYksYksVaihtuu() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '&', '&', '%' },
                             { '&', '#', '%', '#' },
                             { '#', '&', '&', '$' },
                             { '#', '&', '%', '$' } };
         assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 1, 1));
+    }
+
+    @Test
+    public void riviYksi() {
+        char[][] merkit = { { '#', '&', '&', '%' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '$' },
+                            { '#', '&', '%', '$' } };
+        assertEquals(1, ASCIIArt.filtteroitavaRivi(merkit, 3));
     }
 
 }

@@ -413,13 +413,17 @@ public class ASCIIArt {
             for (int j = 0; j < koko; j++) {
                 if (merkit[i][j] == merkit[rivi][sarake]){
                     palautettavaMerkki = lukuaVastaavaMerkki;
-                } else {
-                    palautettavaMerkki = merkit[i][j];
+                // } else {
+                    // palautettavaMerkki = merkit[i][j];
                 }
             }
         }
 
         return palautettavaMerkki;
+    }
+
+    public static int filtteroitavaRivi(char[][] merkit, int koko) {
+        return koko / 2;
     }
 
 
