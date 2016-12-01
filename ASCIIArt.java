@@ -403,7 +403,8 @@ public class ASCIIArt {
     public static boolean paikanVoiFiltteroida(int rivienLkm, int sarakkeidenLkm,
     int suodattimenKoko, int rivi, int sarake) {
         boolean voiFiltteroida = false;
-        if (rivi > 0 && sarake > 0) {
+        int oikeaReuna = sarakkeidenLkm - 1;
+        if (rivi > 0 && sarake > 0 && sarake < oikeaReuna) {
             voiFiltteroida = true;
         } else {
             voiFiltteroida = false;

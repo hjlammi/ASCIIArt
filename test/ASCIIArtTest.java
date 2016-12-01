@@ -170,4 +170,10 @@ public class ASCIIArtTest {
         assertEquals(false, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 0, 0));
     }
 
+    @Test
+    public void suodatin3YksiKolme() {
+        assertEquals(false, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 1, 3));
+    }
+
+
 }
