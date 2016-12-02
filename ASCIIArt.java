@@ -446,17 +446,26 @@ public class ASCIIArt {
     }
 
 
-    // Metodi saa parametreina merkkilistan, merkit-tauluko
+    // Metodi saa parametreina merkkilistan, merkit-taulukon ja filtterin koon, filtteröi merkit-taulukon ja
+    // palauttaa uuden filtteröidyn taulukon.
     public static char[][] filtteroi(char[] merkkilista, char[][] merkit, int filtterinKoko) {
+        // Saadaan rivien ja sarakkeiden lukumäärä merkit-taulukosta, koska uudesta filtteröidystä taulukosta
+        // tulee saman kokoinen kuin alkuperäisestä.
         int rivit = merkit.length;
         int sarakkeet = merkit[0].length;
+        // Alustetaan uusi taulukko alkuperäisen taulukon kokoiseksi.
         char[][] filtteroidytMerkit = new char[rivit][sarakkeet];
+        // Käydään taulukkoa läpi rivi ja sarake kerrallaan.
         for (int i = 0; i < merkit.length; i++) {
             for (int j = 0; j < merkit[i].length; j++) {
+                // Kutsutaan metodia, joka saa parametreina merkkilistan, merkit-taulukon, filtterin koon, rivin
+                // ja sarakkeen ja palauttaa merkin.
                 char filtteroityMerkki = filtteroiPaikka(merkkilista, merkit, filtterinKoko, i, j);
+                // Sijoitetaan paluuarvona saatu merkki uuteen taulukkoon koordinaattiin i,j.
                 filtteroidytMerkit[i][j] = filtteroityMerkki;
             }
         }
+        // Paluuarvona saadaan uusi taulukko täytettynä.
         return filtteroidytMerkit;
     }
 }

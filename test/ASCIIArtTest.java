@@ -221,7 +221,36 @@ public class ASCIIArtTest {
         char[][] tulos =  { { '#', '&', '&' },
                             { '&', '&', '%' },
                             { '#', '&', '&' } };
-        assertEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
+        assertArrayEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
     }
 
+    /*@Test
+    public void filtteroi4x4() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '#' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '#' },
+                            { '#', '&', '#', '#' } };
+
+        char[][] tulos =  { { '#', '&', '&', '#' },
+                            { '&', '&', '&', '#' },
+                            { '#', '&', '#', '#' },
+                            { '#', '&', '#', '#' } };
+        assertArrayEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
+    }*/
+
+    /*@Test
+    public void paikkaKaksiKaksi() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '#' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '#' },
+                            { '#', '&', '#', '#' } };
+        assertEquals('#', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 2, 2));
+    }*/
+
+    @Test
+    public void suodatin3KaksKaks() {
+        assertEquals(true, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 2, 2));
+    }
 }
