@@ -309,7 +309,8 @@ public class ASCIIArt {
 
             int[] luvut = new int[filtterinKoko];
             int lukujenInd = 0;
-            // Käydään kaksiulotteinen merkit-taulukko läpi ja muutetaan merkki sitä vastaavaksi luvuksi.
+            // Käydään läpi filtterinkokoinen alue kaksiulotteisesta merkit-taulukosta
+            // ja muutetaan merkki sitä vastaavaksi luvuksi.
             for (int i = 0; i < koko; i++) {
                 for (int j = 0; j < koko; j++) {
                     char merkki = merkit[i][j];
@@ -322,6 +323,11 @@ public class ASCIIArt {
         } else {
             return null;
         }
+    }
+
+    public static int filtterinYlarivi(char[] merkkilista, char[][] merkit, int koko) {
+        int rivi = 0;
+        return rivi;
     }
 
 
@@ -419,6 +425,7 @@ public class ASCIIArt {
         int rivienLkm = merkit.length;
         int sarakkeidenLkm = merkit[0].length;
         boolean voiFiltteroida = paikanVoiFiltteroida(rivienLkm, sarakkeidenLkm, koko, rivi, sarake);
+        // System.out.println(voiFiltteroida);
         // Jos koordinaatti on liian lähellä reunaa, palautetaan reunassa oleva merkki.
         if (!voiFiltteroida) {
             palautettavaMerkki = merkit[rivi][sarake];
@@ -430,6 +437,7 @@ public class ASCIIArt {
             // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
             palautettavaMerkki = lukuaVastaavaMerkki;
         }
+        // System.out.println(palautettavaMerkki);
         return palautettavaMerkki;
     }
 
@@ -461,6 +469,7 @@ public class ASCIIArt {
                 // Kutsutaan metodia, joka saa parametreina merkkilistan, merkit-taulukon, filtterin koon, rivin
                 // ja sarakkeen ja palauttaa merkin.
                 char filtteroityMerkki = filtteroiPaikka(merkkilista, merkit, filtterinKoko, i, j);
+                // System.out.println(filtteroityMerkki);
                 // Sijoitetaan paluuarvona saatu merkki uuteen taulukkoon koordinaattiin i,j.
                 filtteroidytMerkit[i][j] = filtteroityMerkki;
             }

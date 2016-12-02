@@ -253,4 +253,21 @@ public class ASCIIArtTest {
     public void suodatin3KaksKaks() {
         assertEquals(true, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 2, 2));
     }
+
+    @Test
+    public void merkkiOnRisuaita() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        assertEquals('#', ASCIIArt.muutaLukuMerkiksi(merkkitaulukko, 0));
+    }
+
+    @Test
+    public void filtterinYlariviNolla() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&', '%' },
+                            { '&', '#', '%', '#' },
+                            { '#', '&', '&', '$' },
+                            { '#', '&', '%', '$' } };
+        assertEquals(0, ASCIIArt.filtterinYlarivi(merkkitaulukko, merkit, 3));
+    }
+
 }
