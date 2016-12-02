@@ -12,6 +12,8 @@ import java.util.*;
 
 public class ASCIIArt {
     public static void main(String[] args) {
+        final String ERROR = "Invalid command-line argument!";
+
         // Esitellään, luodaan ja alustetaan merkkitaulu.
         char[] merkkitaulu = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
 
@@ -22,9 +24,9 @@ public class ASCIIArt {
 
         if (args.length > 0) {
             String tiedostonNimi = args[0];
-            merkit = luoTaulukko(tiedostonNimi);
+            merkit = lataaTaulukko(tiedostonNimi);
             if (args.length != 1 || merkit == null) {
-                System.out.println("Invalid command-line argument!");
+                System.out.println(ERROR);
             } else {
                 boolean jatketaan = true;
                 do {
@@ -37,6 +39,20 @@ public class ASCIIArt {
                         System.out.println(merkitLukuina(merkkitaulu, merkit));
                     } else if (komento.equals("info")){
                         System.out.println(infoMjonona(merkkitaulu, merkit));
+                    } else if (komento.startsWith("filter")) {
+                        String[] osat = komento.split("[ ]");
+                        int koko = 3;
+                        if (osat.length > 1) {
+                            koko = Integer.parseInt(osat[1]);
+                        } else {
+                            koko = 3;
+                        }
+                        if (koko % 2 == 0) {
+                            System.out.println("Invalid command!");
+                        } else {
+                            merkit = filtteroi(merkkitaulu, merkit, 3);
+                            tulosta(merkit);
+                        }
                     } else if (komento.equals("quit")) {
                         tulostaHeipat();
                         jatketaan = false;
@@ -46,7 +62,7 @@ public class ASCIIArt {
                 } while (jatketaan);
             }
         } else {
-            System.out.println("Invalid command-line argument!");
+            System.out.println(ERROR);
             // Kutsutaan metodia, joka tulostaa heipat.
             tulostaHeipat();
         }
@@ -88,6 +104,7 @@ public class ASCIIArt {
     public static void tulostaHeipat() {
         System.out.println("Bye, see you soon.");
     }
+
 
     // Metodi tulostaa parametrina saamansa kaksiulotteisen taulukon.
     public static void tulosta(char[][] merkit){
@@ -173,7 +190,7 @@ public class ASCIIArt {
     }
 
     // Metodi saa parametrina tiedoston nimen ja lukee tiedoston merkit kaksiulotteiseen taulukkoon.
-    public static char[][] luoTaulukko(String tiedostonNimi) {
+    public static char[][] lataaTaulukko(String tiedostonNimi) {
         // Kutsutaan metodia, joka saa parametrina tiedoston nimen ja laskee tiedostossa olevien rivien määrän.
         int rivienLkm = laskeRivit(tiedostonNimi);
 
