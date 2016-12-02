@@ -314,6 +314,7 @@ public class ASCIIArt {
             int filtterinEkaSarake = sarake - koko / 2;
             // Käydään läpi filtterinkokoinen alue kaksiulotteisesta merkit-taulukosta
             // ja muutetaan merkki sitä vastaavaksi luvuksi.
+            // if (rivi > koko / 2 && rivi < rivienLkm - koko / 2 && sarake > koko / 2 && sarake < sarakkeidenLkm - koko / 2 ) {
             for (int i = filtterinYlarivi; i < filtterinYlarivi + koko; i++) {
                 for (int j = filtterinEkaSarake; j < filtterinEkaSarake + koko; j++) {
                     char merkki = merkit[i][j];
@@ -322,6 +323,7 @@ public class ASCIIArt {
                     lukujenInd++;
                 }
             }
+            // }
             return luvut;
         } else {
             return null;

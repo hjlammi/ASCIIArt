@@ -102,7 +102,7 @@ public class ASCIIArtTest {
         assertEquals('@', ASCIIArt.muutaLukuMerkiksi(merkkitaulukko, 1));
     }
 
-    /*@Test
+    @Test
     public void filter3x3() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '#', '&', '#'},
@@ -110,7 +110,7 @@ public class ASCIIArtTest {
                             { '#', '#', '&', '$' },
                             { '@', '@', '&', '$' } };
         int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
-        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 0, 0));
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 1, 1));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class ASCIIArtTest {
                             { '#', '&', '&', '$' },
                             { '#', '&', '%', '$' } };
         assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 1, 1));
-    }*/
+    }
 
     @Test
     public void riviYksi() {
