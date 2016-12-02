@@ -73,15 +73,15 @@ public class ASCIIArtTest {
         assertEquals(tulos, ASCIIArt.infoMjonona(merkkitaulukko, merkit));
     }
 
-    /*@Test
+    @Test
     public void filterLuvuiksi() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '#', '&' },
                             { '&', '#', '%' },
                             { '#', '#', '&' } };
         int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
-        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 0, 0));
-    }*/
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 1, 1));
+    }
 
     @Test
     public void lajittelu() {
