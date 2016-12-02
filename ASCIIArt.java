@@ -301,7 +301,7 @@ public class ASCIIArt {
 
     // Filtteröinti.
 
-    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit, int koko) {
+    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
         if (merkkitaulukko != null && merkit != null) {
             int rivienLkm = koko;
             int sarakkeidenLkm = koko;
@@ -309,10 +309,13 @@ public class ASCIIArt {
 
             int[] luvut = new int[filtterinKoko];
             int lukujenInd = 0;
+
+            int filtterinYlarivi = rivi - koko / 2;
+            int filtterinEkaSarake = sarake - koko / 2;
             // Käydään läpi filtterinkokoinen alue kaksiulotteisesta merkit-taulukosta
             // ja muutetaan merkki sitä vastaavaksi luvuksi.
-            for (int i = 0; i < koko; i++) {
-                for (int j = 0; j < koko; j++) {
+            for (int i = filtterinYlarivi; i < filtterinYlarivi + koko; i++) {
+                for (int j = filtterinEkaSarake; j < filtterinEkaSarake + koko; j++) {
                     char merkki = merkit[i][j];
                     int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
                     luvut[lukujenInd] = merkkiLukuna;
@@ -323,11 +326,6 @@ public class ASCIIArt {
         } else {
             return null;
         }
-    }
-
-    public static int filtterinYlarivi(char[] merkkilista, char[][] merkit, int koko) {
-        int rivi = 0;
-        return rivi;
     }
 
 
@@ -430,7 +428,10 @@ public class ASCIIArt {
         if (!voiFiltteroida) {
             palautettavaMerkki = merkit[rivi][sarake];
         } else {
-            int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
+            /*int filtterinYlarivi = rivi - koko / 2;
+            System.out.println(filtterinYlarivi);
+            int filtterinEkaSarake = sarake - koko / 2;*/
+            int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko, rivi, sarake);
             lajittele(merkkejaVastaavatLuvut);
             int mediaani = mediaani(merkkejaVastaavatLuvut);
             char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);

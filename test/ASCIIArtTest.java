@@ -73,15 +73,15 @@ public class ASCIIArtTest {
         assertEquals(tulos, ASCIIArt.infoMjonona(merkkitaulukko, merkit));
     }
 
-    @Test
+    /*@Test
     public void filterLuvuiksi() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '#', '&' },
                             { '&', '#', '%' },
                             { '#', '#', '&' } };
         int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
-        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3));
-    }
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 0, 0));
+    }*/
 
     @Test
     public void lajittelu() {
@@ -102,7 +102,7 @@ public class ASCIIArtTest {
         assertEquals('@', ASCIIArt.muutaLukuMerkiksi(merkkitaulukko, 1));
     }
 
-    @Test
+    /*@Test
     public void filter3x3() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '#', '&', '#'},
@@ -110,7 +110,7 @@ public class ASCIIArtTest {
                             { '#', '#', '&', '$' },
                             { '@', '@', '&', '$' } };
         int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
-        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3));
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 0, 0));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class ASCIIArtTest {
                             { '#', '&', '&', '$' },
                             { '#', '&', '%', '$' } };
         assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 1, 1));
-    }
+    }*/
 
     @Test
     public void riviYksi() {
@@ -224,7 +224,7 @@ public class ASCIIArtTest {
         assertArrayEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
     }
 
-    /*@Test
+    @Test
     public void filtteroi4x4() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '&', '&', '#' },
@@ -237,9 +237,9 @@ public class ASCIIArtTest {
                             { '#', '&', '#', '#' },
                             { '#', '&', '#', '#' } };
         assertArrayEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void paikkaKaksiKaksi() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
         char[][] merkit = { { '#', '&', '&', '#' },
@@ -247,7 +247,7 @@ public class ASCIIArtTest {
                             { '#', '&', '&', '#' },
                             { '#', '&', '#', '#' } };
         assertEquals('#', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 3, 2, 2));
-    }*/
+    }
 
     @Test
     public void suodatin3KaksKaks() {
@@ -261,13 +261,15 @@ public class ASCIIArtTest {
     }
 
     @Test
-    public void filtterinYlariviNolla() {
+    public void filtterinYlareuna0Sarake0() {
         char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
-        char[][] merkit = { { '#', '&', '&', '%' },
-                            { '&', '#', '%', '#' },
-                            { '#', '&', '&', '$' },
-                            { '#', '&', '%', '$' } };
-        assertEquals(0, ASCIIArt.filtterinYlarivi(merkkitaulukko, merkit, 3));
+        char[][] merkit = { { '#', '#', '&' },
+                            { '&', '#', '%' },
+                            { '#', '#', '&' },
+                            { '@', '@', '&' } };
+        int[] luvut = { 0, 0, 2, 2, 0, 4, 0, 0, 2 };
+        assertArrayEquals(luvut, ASCIIArt.muutaFiltteriLuvuiksi(merkkitaulukko, merkit, 3, 1, 1));
     }
+
 
 }
