@@ -212,6 +212,16 @@ public class ASCIIArtTest {
         assertEquals('&', ASCIIArt.filtteroiPaikka(merkkitaulukko, merkit, 5, 2, 2));
     }
 
-
+    @Test
+    public void filtteroiYksiYksi() {
+        char[] merkkitaulukko = { '#', '@', '&', '$', '%' };
+        char[][] merkit = { { '#', '&', '&' },
+                            { '&', '#', '%' },
+                            { '#', '&', '&' } };
+        char[][] tulos =  { { '#', '&', '&' },
+                            { '&', '&', '%' },
+                            { '#', '&', '&' } };
+        assertEquals(tulos, ASCIIArt.filtteroi(merkkitaulukko, merkit, 3));
+    }
 
 }

@@ -446,11 +446,17 @@ public class ASCIIArt {
     }
 
 
-
-    /*public static void filtteroi(char[] merkkitaulukko, char[][] merkit, int koko) {
-        int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko);
-        lajittele(merkkejaVastaavatLuvut);
-        int mediaani = mediaani(merkkejaVastaavatLuvut);
-        char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
-    }*/
+    // Metodi saa parametreina merkkilistan, merkit-tauluko
+    public static char[][] filtteroi(char[] merkkilista, char[][] merkit, int filtterinKoko) {
+        int rivit = merkit.length;
+        int sarakkeet = merkit[0].length;
+        char[][] filtteroidytMerkit = new char[rivit][sarakkeet];
+        for (int i = 0; i < merkit.length; i++) {
+            for (int j = 0; j < merkit[i].length; j++) {
+                char filtteroityMerkki = filtteroiPaikka(merkkilista, merkit, filtterinKoko, i, j);
+                filtteroidytMerkit[i][j] = filtteroityMerkki;
+            }
+        }
+        return filtteroidytMerkit;
+    }
 }
