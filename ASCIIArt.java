@@ -207,6 +207,7 @@ public class ASCIIArt {
 
     // Metodi saa parametreina merkkitaulukon ja merkin ja palauttaa merkkiä vastaavan indeksiarvon.
     public static int muutaMerkkiNumeroksi(char[] merkkitaulukko, char merkki) {
+        // Esitellään ja alustetaan muuttuja.
         boolean merkkiLoytyi = false;
         // Esitellään ja alustetaan luku luvulla, jota ei löydy merkkitaulukon indekseistä.
         int luku = -1;
@@ -311,7 +312,7 @@ public class ASCIIArt {
         return rivienLkm;
     }
 
-    // Metodi saa parametrina merkkijonon, jonka se pilkkoon taulukkoon.
+    // Metodi saa parametrina merkkijonon, jonka se pilkkoo taulukkoon.
     public static char[] pilkoMerkkijono(String rivi) {
         // Esitellään ja alustetaan yksiulotteinen taulukko, jonka koko on merkkijonon eli rivin pituus.
         char[] merkit = new char[rivi.length()];
@@ -327,28 +328,34 @@ public class ASCIIArt {
 
     // Info
 
+    // Metodi saa parametrina kaksiulotteisen taulukon ja palauttaa sen korkeuden.
     public static int taulukonKorkeus(char[][] merkit) {
         int korkeus = merkit.length;
         return korkeus;
     }
 
     // Metodi palauttaa parametrina saamansa taulukon leveyden.
-    // Oletetaan, että kaikki rivit  ovat yhtä leveitä.
+    // Oletetaan, että kaikki rivit ovat yhtä leveitä.
     public static int taulukonLeveys(char[][] merkit) {
         int leveys = merkit[0].length;
         return leveys;
     }
 
+    // Metodi saa parametreina merkit ja kaksiulotteisen taulukon ja laskee merkkien
+    // esiintymät kyseisessä taulukossa.
     public static int merkinLkmTaulukossa(char merkki, char[][] merkit) {
+        // Merkin esiintymien lkm on nolla.
         int lkm = 0;
-        // Käydään merkit-taulukko läpi ja pidetään kirjaa merkkien esiintymistä siinä.
+        // Käydään merkit-taulukko läpi ja pidetään kirjaa merkin esiintymistä siinä.
         for (int i = 0; i < merkit.length; i++) {
             for (int j = 0; j < merkit[i].length; j++) {
+                // Jos paikassa i,j on tutkittava merkki, kasvatetaan lkm-laskuria.
                 if (merkit[i][j] == merkki) {
                     lkm++;
                 }
             }
         }
+        // Palautetaan merkin esiintymistä kirjaa pitävä kokonaisluku.
         return lkm;
     }
 
