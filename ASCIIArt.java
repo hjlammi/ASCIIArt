@@ -82,7 +82,6 @@ public class ASCIIArt {
                         // Taulukko tulostetaan tulostusmetodilla.
                         } else {
                             merkit = filtteroi(merkkitaulu, merkit, koko);
-                            tulosta(merkit);
                         }
                     // Jos komento on "reset", kutsutaan metodia, joka lataa uudestaan alkuperäisen
                     // taulukon tiedostosta merkit-muuttujaan.
