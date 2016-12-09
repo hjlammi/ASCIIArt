@@ -124,33 +124,6 @@ public class ASCIIArtTest {
     }
 
     @Test
-    public void riviYksi() {
-        char[][] merkit = { { '#', '&', '&', '%' },
-                            { '&', '#', '%', '#' },
-                            { '#', '&', '&', '$' },
-                            { '#', '&', '%', '$' } };
-        assertEquals(1, ASCIIArt.filtteroitavaRivi(merkit, 3));
-    }
-
-    @Test
-    public void riviYksiKokoViisi() {
-        char[][] merkit = { { '#', '&', '&', '%' },
-                            { '&', '#', '%', '#' },
-                            { '#', '&', '&', '$' },
-                            { '#', '&', '%', '$' } };
-        assertEquals(2, ASCIIArt.filtteroitavaRivi(merkit, 5));
-    }
-
-    @Test
-    public void SarakeYksi() {
-        char[][] merkit = { { '#', '&', '&', '%' },
-                            { '&', '#', '%', '#' },
-                            { '#', '&', '&', '$' },
-                            { '#', '&', '%', '$' } };
-        assertEquals(1, ASCIIArt.filtteroitavaSarake(merkit, 3));
-    }
-
-    @Test
     public void suodatin3YksYks() {
         assertEquals(true, ASCIIArt.paikanVoiFiltteroida(4, 4, 3, 1, 1));
     }

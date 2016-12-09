@@ -3,7 +3,7 @@
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi
  *
- * Viimeksi muokattu: 1.12.2016.
+ * Viimeksi muokattu: 9.12.2016.
  * Käytetty aika: 5 + 8 + 3
  *
  */
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class ASCIIArt {
     public static void main(String[] args) {
-        final String ERROR = "Invalid command-line argument!";
+        final String VIRHEKOMENTO = "Invalid command-line argument!";
 
         // Esitellään, luodaan ja alustetaan merkkitaulu.
         char[] merkkitaulu = { '#', '@', '&', '$', '%', 'x', '*', 'o', '|', '!', ';', ':', '\'', ',', '.', ' '};
@@ -20,27 +20,49 @@ public class ASCIIArt {
         // Kutsutaan metodia, joka tulostaa tervehdyksen.
         tulostaTervehdys();
 
+        // Esitellään muuttujat.
         char[][] merkit;
+        String tiedostonNimi;
 
+        // Jos komentoriviparametreja on enemmän kuin nolla kpl, sijoitetaan tiedostonNimi-muuttujaan
+        // komentoriviparametrina saatu tiedoston nimi.
         if (args.length > 0) {
-            String tiedostonNimi = args[0];
+            tiedostonNimi = args[0];
+            // Kutsutaan metodia, joka saa parametrina tiedoston nimen ja lataa tiedostosta taulukon sekä
+            // sijoittaa sen merkit-muuttujaan.
             merkit = lataaTaulukko(tiedostonNimi);
+            // Jos komentoriviparametreja on useampia kuin kaksi tai jos tiedostoa ei löydy,
+            // tulostetaan virheilmoitus sekä kutsutaan metodia, joka tulostaa jäähyväiset.
             if (args.length != 1 || merkit == null) {
-                System.out.println(ERROR);
+                System.out.println(VIRHEKOMENTO);
+                tulostaHeipat();
+
+            // Jos komentoriviparametrit ja tiedosto ovat kunnossa, jatketaan ohjelman suorittamista.
             } else {
+                // Esitellään ja alustetaan muuttuja.
                 boolean jatketaan = true;
+                // Niin kauan kuin jatketaan, muuttujan arvo on tosi, jatketaan komentojen pyytämistä.
                 do {
+                    // Kutsutaan metodia, joka tulostaa käytettävissä olevat komennot.
                     tulostaKomennot();
                     // Luetaan käyttäjältä komento.
                     String komento = In.readString();
+
+                    // Jos komento on "printa", kutsutaan metodia,
+                    // joka tulostaa parametrinaan saamansa merkit-taulukon.
                     if (komento.equals("printa")) {
                         tulosta(merkit);
+                    // Jos komento on "printi", tulostetaan merkit-taulun sisältö lukuina.
                     } else if (komento.equals("printi")) {
                         System.out.println(merkitLukuina(merkkitaulu, merkit));
+                    // Jos komento on "info", tulostetaan tietoja merkit-taulukosta.
                     } else if (komento.equals("info")){
                         System.out.println(infoMjonona(merkkitaulu, merkit));
+                    // Jos komento alkaa sanalla "filter"...
                     } else if (komento.startsWith("filter")) {
+                        // ...pilkotaan komennon osat osat-taulukkoon välilyönnin kohdalta.
                         String[] osat = komento.split("[ ]");
+                        //
                         int koko = 3;
                         if (osat.length > 1) {
                             koko = Integer.parseInt(osat[1]);
@@ -50,9 +72,11 @@ public class ASCIIArt {
                         if (koko % 2 == 0) {
                             System.out.println("Invalid command!");
                         } else {
-                            merkit = filtteroi(merkkitaulu, merkit, 3);
+                            merkit = filtteroi(merkkitaulu, merkit, koko);
                             tulosta(merkit);
                         }
+                    } else if (komento.equals("reset")) {
+                        merkit = lataaTaulukko(tiedostonNimi);
                     } else if (komento.equals("quit")) {
                         tulostaHeipat();
                         jatketaan = false;
@@ -62,7 +86,7 @@ public class ASCIIArt {
                 } while (jatketaan);
             }
         } else {
-            System.out.println(ERROR);
+            System.out.println(VIRHEKOMENTO);
             // Kutsutaan metodia, joka tulostaa heipat.
             tulostaHeipat();
         }
@@ -440,7 +464,6 @@ public class ASCIIArt {
         int rivienLkm = merkit.length;
         int sarakkeidenLkm = merkit[0].length;
         boolean voiFiltteroida = paikanVoiFiltteroida(rivienLkm, sarakkeidenLkm, koko, rivi, sarake);
-        // System.out.println(voiFiltteroida);
         // Jos koordinaatti on liian lähellä reunaa, palautetaan reunassa oleva merkki.
         if (!voiFiltteroida) {
             palautettavaMerkki = merkit[rivi][sarake];
@@ -455,22 +478,8 @@ public class ASCIIArt {
             // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
             palautettavaMerkki = lukuaVastaavaMerkki;
         }
-        // System.out.println(palautettavaMerkki);
         return palautettavaMerkki;
     }
-
-    public static int filtteroitavaRivi(char[][] merkit, int koko) {
-        int rivi = -1;
-        rivi = koko / 2;
-        return rivi;
-    }
-
-    public static int filtteroitavaSarake(char[][] merkit, int koko) {
-        int rivi = -1;
-        rivi = koko / 2;
-        return rivi;
-    }
-
 
     // Metodi saa parametreina merkkilistan, merkit-taulukon ja filtterin koon, filtteröi merkit-taulukon ja
     // palauttaa uuden filtteröidyn taulukon.
