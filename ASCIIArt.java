@@ -62,24 +62,38 @@ public class ASCIIArt {
                     } else if (komento.startsWith("filter")) {
                         // ...pilkotaan komennon osat osat-taulukkoon välilyönnin kohdalta.
                         String[] osat = komento.split("[ ]");
-                        //
+                        // Esitellään filtterin koko-muuttuja ja alustetaan se kolmella, joka
+                        // on pienin filtterin koko ja koko, jota käytetään, jos ei käyttäjä määrittele
+                        // muuta kokoa kutsussaan.
                         int koko = 3;
+                        // Jos osat-taulukossa on enemmän kuin yksi alkiota eli komennossa on määritelty
+                        // filtterin koko, sijoitetaan koko-muuttujaan merkkijonosta muutettu luku
+                        // taulukon indeksistä yksi. Muuten filtterin koko on siis kolme.
                         if (osat.length > 1) {
                             koko = Integer.parseInt(osat[1]);
                         } else {
                             koko = 3;
                         }
+                        // Jos koko on parillinen, tulostetaan virheilmoitus.
                         if (koko % 2 == 0) {
                             System.out.println("Invalid command!");
+                        // Jos koko on pariton, kutsutaan metodia, joka filtteröi parametrina saamansa
+                        // taulukon ja palauttaa samaan taulukkomuuttujaan filtteröidyn taulukon.
+                        // Taulukko tulostetaan tulostusmetodilla.
                         } else {
                             merkit = filtteroi(merkkitaulu, merkit, koko);
                             tulosta(merkit);
                         }
+                    // Jos komento on "reset", kutsutaan metodia, joka lataa uudestaan alkuperäisen
+                    // taulukon tiedostosta merkit-muuttujaan.
                     } else if (komento.equals("reset")) {
                         merkit = lataaTaulukko(tiedostonNimi);
+                    // Jos komento on "quit", tulostetaan heipat metodin avulla ja käännetään
+                    // lippumuuttuja, jotta lopetetaan komentojen pyytäminen.
                     } else if (komento.equals("quit")) {
                         tulostaHeipat();
                         jatketaan = false;
+                    // Jos komento ei ole validi, tulostetaan virheilmoitus.
                     } else {
                         System.out.println("Invalid command!");
                     }
@@ -152,26 +166,39 @@ public class ASCIIArt {
         }
     }
 
-    public static String merkitLukuina(char[] merkkitaulukko, char[][] merkit) {
-        // Verrataan merkit-taulukossa olevaa merkkiä merkkitaulukossa oleviin merkkeihin
-        // ja jos merkit-taulukossa oleva merkki vastaa jotain taulukossa olevaa merkkiä
-        // otetaan sen indeksi ylös luvut-muuttujaan.
-        if (merkit != null && merkkitaulukko != null) {
+    // Metodi saa parametreina merkkitaulun sekä merkit-taulukon ja muuttaa merkit-taulukon merkit
+    // luvuiksi sekä kerää luvut merkkijonoksi, joka saadaan metodista paluuarvona.
+    public static String merkitLukuina(char[] merkkitaulu, char[][] merkit) {
+
+        // Tarkistetaan, että taulukoille on varattu muistia.
+        if (merkit != null && merkkitaulu != null) {
+            // Esitellään ja alustetaan luvut-merkkjono.
             String luvut = "";
+            // Verrataan merkit-taulukossa olevaa merkkiä merkkitaulussa oleviin merkkeihin
+            // ja jos merkit-taulukossa oleva merkki vastaa jotain merkkitaulussa olevaa merkkiä
+            // otetaan sen indeksi ylös merkkitaulusta luvut-merkkijonoon.
             for (int i = 0; i < merkit.length; i++) {
                 for (int j = 0; j < merkit[i].length; j++) {
+                    // Sijoitetaan merkki-muuttujaan arvo riviltä i, sarakkeesta j.
                     char merkki = merkit[i][j];
-                    int luku = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
+                    // Kutsutaan metodia, joka muuttaa merkin numeroksi ja sijoitetaan paluuarvo
+                    // luku-muuttujaan.
+                    int luku = muutaMerkkiNumeroksi(merkkitaulu, merkki);
+                    // Kutsutaan metodia, joka muuttaa luvun merkkijonoksi.
                     String lukuMjonona = muutaLukuMjonoksi(luku);
+                    // Lisätään luvut-merkkijonoon merkkijonoksi muutettu luku.
                     luvut = luvut + lukuMjonona;
+                    // Lisätään lukujen väliin välilyönti.
                     if (j < merkit[i].length - 1) {
                         luvut = luvut + " ";
                     }
                 }
+                // Lisätään rivien perään rivinvaihto, paitsi viimeisen rivin perään.
                 if (i < merkit.length - 1) {
                     luvut = luvut + "\n";
                 }
             }
+            // Paluuarvona saadaan luvut-merkkijono.
             return luvut;
         } else {
             return "E";
