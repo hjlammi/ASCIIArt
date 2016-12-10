@@ -3,10 +3,14 @@
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi
  *
- * Viimeksi muokattu: 9.12.2016.
- * Käytetty aika: 5 + 8 + 3
+ * Viimeksi muokattu: 10.12.2016.
  *
+ * Ohjelma lataa tiedostosta ASCII-grafiikkaa ja tarjoaa käyttäjälle mahdollisuuden
+ * tulostaa grafiikan näytölle merkkeinä tai lukuina, tulostaa taulukkoon liittyvää informaatiota,
+ * filtteröidä kuvaa halutunkokoisella mediaanisuotimella ja ladata uudestaan alkuperäisen kuvan.
  */
+
+
 import java.io.*;
 import java.util.*;
 
@@ -358,61 +362,104 @@ public class ASCIIArt {
         return lkm;
     }
 
-    public static String infoMjonona(char[] merkkitaulukko, char[][] merkit) {
+    // Metodi saa parametreina yksi- ja kaksiulotteiset taulukot ja kerää tiedot merkkijonoon,
+    // jonka palauttaa paluuarvona.
+    public static String infoMjonona(char[] merkkitaulu, char[][] merkit) {
+        // Esitellään ja alustetaan merkkijonomuuttuja.
         String info = "";
-        info = info + taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit) + "\n";
-        for (int i = 0; i < merkkitaulukko.length; i++) {
-            char merkki = merkkitaulukko[i];
-            int merkinLkm = merkinLkmTaulukossa(merkki, merkit);
-            info = info + merkki + " " + merkinLkm;
-            if (i < merkkitaulukko.length - 1) {
-                info = info + "\n";
+
+        // Tarkistetaan että taulukoille on varattu muistia.
+        if (merkit != null && merkkitaulu != null) {
+            // Sijoitetaan muuttujaan luvut, jotka saadaan, kun kutsutaan metodeja, jotka selvittävät
+            // taulukon korkeuden ja leveyden. Lisätään myös rivinvaihto.
+            info = taulukonKorkeus(merkit) + " x " + taulukonLeveys(merkit) + "\n";
+            // Käydään merkkitaulu läpi.
+            for (int i = 0; i < merkkitaulu.length; i++) {
+                // Sijoitetaan merkki-muuttujaan merkkitaulun käsiteltävänä oleva merkki.
+                char merkki = merkkitaulu[i];
+                // Kutsutaan metodia, joka saa parametreina merkkitaulusta saadun merkin sekä merkit-taulukon
+                // ja palauttaa merkin esiintymien lukumäärän merkit-taulukossa.
+                int merkinLkm = merkinLkmTaulukossa(merkki, merkit);
+                // Lisätään info-merkkijonoon merkki ja merkkien lukumäärä taulukossa.
+                info = info + merkki + " " + merkinLkm;
+                // Lisätään myös rivinvaihto, paitsi viimeisen rivin jälkeen.
+                if (i < merkkitaulu.length - 1) {
+                    info = info + "\n";
+                }
             }
+            // Paluuarvona saadaan info-merkkijono.
+            return info;
+        } else {
+            return "E";
         }
-        return info;
     }
 
 
     // Filtteröinti.
 
-    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
-        if (merkkitaulukko != null && merkit != null) {
+    // Metodi saa parametreina merkkitaulun, merkit-taulukon, filtterin koon, filtteröitävän rivin ja sarakkeen ja
+    // antaa paluuarvona viitteen yksiulotteiseen taulukkoon, jossa on filtteröitävän alueen luvut.
+    public static int[] muutaFiltteriLuvuiksi(char[] merkkitaulu, char[][] merkit, int koko, int rivi, int sarake) {
+
+        // Tarkistetaan että taulukoille on varattu muistia.
+        if (merkkitaulu != null && merkit != null) {
+            // Esitellään muuttujat ja alustetaan niihin filtterin sivujen pituus eli "koko".
             int rivienLkm = koko;
             int sarakkeidenLkm = koko;
+
+            // Alustetaan muuttujaan filtterin lukujen kokonaismäärä.
             int filtterinKoko = rivienLkm * sarakkeidenLkm;
 
+            // Esitellään ja alustetaan muuttuja filtterin kokoiseksi.
             int[] luvut = new int[filtterinKoko];
+
+            // Esitellään ja alustetaan muuttuja, jolla siirrytään indeksejä eteenpäin.
             int lukujenInd = 0;
 
+            // Filtterin ensimmäinen rivi löydetään siten, että vähennetään filtteröitävänä olevasta rivistä
+            // puolet filtterin sivun koosta.
             int filtterinYlarivi = rivi - koko / 2;
+            // Filtterin ensimmäinen sarake löydetään siten, että vähennetään filtteröitävänä olevasta sarakkeesta
+            // puolet filtterin sivun koosta.
             int filtterinEkaSarake = sarake - koko / 2;
             // Käydään läpi filtterinkokoinen alue kaksiulotteisesta merkit-taulukosta
             // ja muutetaan merkki sitä vastaavaksi luvuksi.
+            // Silmukkaa suoritetaan filtterin sivunmittainen alue kerrallaan.
             for (int i = filtterinYlarivi; i < filtterinYlarivi + koko; i++) {
                 for (int j = filtterinEkaSarake; j < filtterinEkaSarake + koko; j++) {
+                    // Luetaan muuttujaan merkki taulukosta.
                     char merkki = merkit[i][j];
-                    int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulukko, merkki);
+                    // Kutsutaan metodia, joka muuttaa merkin indeksiä vastaavaksi luvuksi.
+                    int merkkiLukuna = muutaMerkkiNumeroksi(merkkitaulu, merkki);
+                    // Sijoitetaan uuteen luvut-taulukkoon merkistä muutettu luku.
                     luvut[lukujenInd] = merkkiLukuna;
+                    // Kasvatetaan indeksiä.
                     lukujenInd++;
                 }
             }
+            // Paluuarvona saadaan viite luvut-taulukkoon.
             return luvut;
         } else {
             return null;
         }
     }
 
-
-    public static char muutaLukuMerkiksi(char[] merkkitaulukko, int luku) {
-        // Käydään läpi merkkitaulukkoa, kunnes löydetään lukua vastaava merkki.
+    // Metodi saa parametrina merkkitaulun ja luvun ja muuttaa luvun merkkitaulussa olevaksi merkiksi,
+    // joka saadaan metodista paluuarvona.
+    public static char muutaLukuMerkiksi(char[] merkkitaulu, int luku) {
+        // Alustetaan merkki merkillä, jota ei löydy merkkitaulusta.
         char merkki = 'K';
         boolean merkkiLoytyi = false;
-        for (int i = 0; i < merkkitaulukko.length && !merkkiLoytyi; i++) {
+        // Käydään läpi merkkitaulukkoa, kunnes löydetään lukua vastaava merkki.
+        for (int i = 0; i < merkkitaulu.length && !merkkiLoytyi; i++) {
+            // Jos taulukosta löytyy lukua vastaava indeksi, sijoitetaan merkki-muuttujaan merkki
+            // taulukosta ja käännetään lippu merkin löytymisen merkiksi.
             if (i == luku) {
-                merkki = merkkitaulukko[i];
+                merkki = merkkitaulu[i];
                 merkkiLoytyi = true;
             }
         }
+        // Paluuarvona saadaan lukua vastaava merkki.
         return merkki;
     }
 
@@ -478,35 +525,66 @@ public class ASCIIArt {
         }
     }
 
+    // Metodi saa parametreina taulukon rivien ja sarakkeiden lukumäärät, filtterin koon, filtteröitävän
+    // rivin ja sarakkeen ja palauttaa totuusarvon sen mukaan, voidaanko paikka filtteröidä vai ei eli
+    // onko se liian lähellä taulukon reunaa.
     public static boolean paikanVoiFiltteroida(int rivienLkm, int sarakkeidenLkm,
     int filtterinKoko, int rivi, int sarake) {
         boolean voiFiltteroida = false;
+        // Saadaan filtterin reunan leveys, kun jaetaan filtterin koko kahdella.
         int filtterinReuna = filtterinKoko / 2;
+        // Taulukon yläreunan filtteröimätön alue (indeksit) saadaan, kun vähennetään filtterin leveydestä yksi.
+        int ylaReuna = filtterinReuna - 1;
+        // Taulukon vasemman reunan filtteröimätön alue (indeksit) saadaan, kun vähennetään filtterin leveydestä yksi.
+        int vasenReuna = filtterinReuna - 1;
+        // Taulukon oikealla reunalla oleva filtteröimätön alue saadaan, kun vähennetään taulukon sarakkeiden
+        // lukumäärästä filtterin reunan leveys.
         int oikeaReuna = sarakkeidenLkm - filtterinReuna;
+        // Taulukon alareunassa oleva filtteröimätön alue saadaan, kun vähennetään taulukon rivien
+        // lukumäärästä filtterin reunan leveys.
         int alaReuna = rivienLkm - filtterinReuna;
-        if ((rivi > filtterinReuna - 1) && (sarake > filtterinReuna - 1) && (sarake < oikeaReuna) && (rivi < alaReuna)) {
+        // Tutkitaan onko filtteröitävä paikka filtteröimättömän reunuksen sisä- vai ulkopuolella.
+        // Jos rivi on suurempi kuin ylareunan filtteröimätön alue ja pienempi kuin alareunan filtteröimätön alue
+        // ja jos sarake on suurempi kuin vasemman reunan filtteröimätän alue ja vastaavasti pienempi kuin
+        // oikean reunan filtteröimätön alue, paikka voidaan filtteröidä ja totuusarvo on tosi, muussa tapauksessa
+        // totuusarvo on epätosi.
+        if ((rivi > ylaReuna) && (sarake > vasenReuna) && (sarake < oikeaReuna) &&
+        (rivi < alaReuna)) {
             voiFiltteroida = true;
         } else {
             voiFiltteroida = false;
         }
+        // Paluuarvona saadaan totuusarvo, joka kertoo voidaanko paikka filtteröidä.
         return voiFiltteroida;
     }
 
+    // Metodi saa parametreina merkkitaulun, merkit-taulukon, filtterin koon sekä filtteröitävän rivin ja sarakkeen
+    // ja palauttaa filtteröimisen seurauksena saatavan merkin.
     public static char filtteroiPaikka(char[] merkkitaulukko, char[][] merkit, int koko, int rivi, int sarake) {
+        // Alustetaan merkki merkkitaulusta löytymättömällä merkillä.
         char palautettavaMerkki = '0';
+
+        // Filtteröitävän taulukon rivien ja sarakkeiden lukumäärät saadaan merkit-taulukosta.
         int rivienLkm = merkit.length;
+        // Oletetaan, että kaikki rivit ovat saman mittaiset.
         int sarakkeidenLkm = merkit[0].length;
+
+        // Kutsutaan metodia, joka tutkii voiko paikan filtteröidä ja palauttaa totuusarvon riippuen siitä onko
+        // paikka liian lähellä reunaa vai ei.
         boolean voiFiltteroida = paikanVoiFiltteroida(rivienLkm, sarakkeidenLkm, koko, rivi, sarake);
         // Jos koordinaatti on liian lähellä reunaa, palautetaan reunassa oleva merkki.
         if (!voiFiltteroida) {
             palautettavaMerkki = merkit[rivi][sarake];
+        // Jos paikan voi filtteröidä eli se ei ole liina lähellä reunaa...
         } else {
-            /*int filtterinYlarivi = rivi - koko / 2;
-            System.out.println(filtterinYlarivi);
-            int filtterinEkaSarake = sarake - koko / 2;*/
+            // Kutsutaan metodia, joka muuttaa filtterin alueella olevat merkit luvuiksi ja palauttaa viitteen
+            // taulukkoon, johon luvut sijoitetaan.
             int[] merkkejaVastaavatLuvut = muutaFiltteriLuvuiksi(merkkitaulukko, merkit, koko, rivi, sarake);
+            // Kutsutaan metodia, joka lajittelee lukutaulukon.
             lajittele(merkkejaVastaavatLuvut);
+            // Kutsutaan metodia, joka etsii mediaanin lajitellusta taulukosta, ja palauttaa mediaanin arvon.
             int mediaani = mediaani(merkkejaVastaavatLuvut);
+            // Kutsutaan metodia, joka muuttaa mediaanin lukua vastaavaksi merkiksi.
             char lukuaVastaavaMerkki = muutaLukuMerkiksi(merkkitaulukko, mediaani);
             // Filtterin keskipisteessä palautetaan uusi mediaania vastaava merkki.
             palautettavaMerkki = lukuaVastaavaMerkki;
@@ -514,27 +592,33 @@ public class ASCIIArt {
         return palautettavaMerkki;
     }
 
-    // Metodi saa parametreina merkkilistan, merkit-taulukon ja filtterin koon, filtteröi merkit-taulukon ja
+    // Metodi saa parametreina merkkitaulun, merkit-taulukon ja filtterin koon, filtteröi merkit-taulukon ja
     // palauttaa uuden filtteröidyn taulukon.
-    public static char[][] filtteroi(char[] merkkilista, char[][] merkit, int filtterinKoko) {
-        // Saadaan rivien ja sarakkeiden lukumäärä merkit-taulukosta, koska uudesta filtteröidystä taulukosta
-        // tulee saman kokoinen kuin alkuperäisestä.
-        int rivit = merkit.length;
-        int sarakkeet = merkit[0].length;
-        // Alustetaan uusi taulukko alkuperäisen taulukon kokoiseksi.
-        char[][] filtteroidytMerkit = new char[rivit][sarakkeet];
-        // Käydään taulukkoa läpi rivi ja sarake kerrallaan.
-        for (int i = 0; i < merkit.length; i++) {
-            for (int j = 0; j < merkit[i].length; j++) {
-                // Kutsutaan metodia, joka saa parametreina merkkilistan, merkit-taulukon, filtterin koon, rivin
-                // ja sarakkeen ja palauttaa merkin.
-                char filtteroityMerkki = filtteroiPaikka(merkkilista, merkit, filtterinKoko, i, j);
-                // System.out.println(filtteroityMerkki);
-                // Sijoitetaan paluuarvona saatu merkki uuteen taulukkoon koordinaattiin i,j.
-                filtteroidytMerkit[i][j] = filtteroityMerkki;
+    public static char[][] filtteroi(char[] merkkitaulu, char[][] merkit, int filtterinKoko) {
+
+        // Tarkistetaan että taulukoille on varattu muistia.
+        if (merkkitaulu != null && merkit != null) {
+            // Saadaan rivien ja sarakkeiden lukumäärä merkit-taulukosta, koska uudesta filtteröidystä taulukosta
+            // tulee saman kokoinen kuin alkuperäisestä.
+            int rivit = merkit.length;
+            int sarakkeet = merkit[0].length;
+            // Alustetaan uusi taulukko alkuperäisen taulukon kokoiseksi.
+            char[][] filtteroidytMerkit = new char[rivit][sarakkeet];
+            // Käydään taulukkoa läpi rivi ja sarake kerrallaan.
+            for (int i = 0; i < merkit.length; i++) {
+                for (int j = 0; j < merkit[i].length; j++) {
+                    // Kutsutaan metodia, joka saa parametreina merkkilistan, merkit-taulukon, filtterin koon, rivin
+                    // ja sarakkeen ja palauttaa merkin.
+                    char filtteroityMerkki = filtteroiPaikka(merkkitaulu, merkit, filtterinKoko, i, j);
+                    // Sijoitetaan paluuarvona saatu merkki uuteen taulukkoon koordinaattiin i,j.
+                    filtteroidytMerkit[i][j] = filtteroityMerkki;
+                }
             }
+            // Paluuarvona saadaan uusi taulukko täytettynä.
+            return filtteroidytMerkit;
+        // Jos ei ole varattu muistia palautetaan null.
+        } else {
+            return null;
         }
-        // Paluuarvona saadaan uusi taulukko täytettynä.
-        return filtteroidytMerkit;
     }
 }
